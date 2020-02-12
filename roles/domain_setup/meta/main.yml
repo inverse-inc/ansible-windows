@@ -1,0 +1,22 @@
+galaxy_info:
+  author: "Inverse inc <info@inverse.ca>"
+  description: "Configure a Windows domain"
+  company: "Inverse inc"
+  license: "MIT"
+  min_ansible_version: 2.5
+
+  platforms:
+  - name: Windows
+    versions:
+    - 2008
+    - 2008R2
+    - 2012
+    - 2012R2
+    - 2016
+    - 2019
+
+  galaxy_tags:
+    - windows
+    - domain
+
+dependencies: []

@@ -3,5 +3,8 @@
 Documentation for the collection.
 
 This repository has been created to make an Ansible collection from code
-available at https://github.com/jborean93/ansible-windows
+available in [upstream ansible-windows repository](https://github.com/jborean93/ansible-windows).
+
+We use Windows Vagrant boxes provided by
+[packer-windoze](https://github.com/jborean93/packer-windoze) project.
 

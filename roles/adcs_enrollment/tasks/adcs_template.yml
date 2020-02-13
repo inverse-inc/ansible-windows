@@ -28,7 +28,7 @@
 # template
 - name: import the certificate template into AD CS
   win_adcs_template:
-    templates: '{{lookup("template", "adcs_template.xml.j2")}}'
+    templates: '{{ lookup("template", "adcs_template.xml.j2") }}'
     dacl:
     - user: Authenticated Users
       rights:
@@ -103,10 +103,10 @@
     group: Enterprise Admins
 
 - name: check if the template has already been set in CA
-  win_shell: if (Get-CATemplate | Where-Object { $_.Name -eq "{{pri_adcs_enrollment_template_name}}" }) { $true } else { $false }
+  win_shell: if (Get-CATemplate | Where-Object { $_.Name -eq "{{ pri_adcs_enrollment_template_name }}" }) { $true } else { $false }
   register: pri_adcs_enrollment_template_in_ca
   changed_when: no
 
 - name: add imported certificate template to AD CS
-  win_shell: Add-CATemplate -Name {{pri_adcs_enrollment_template_name|quote}} -Force
+  win_shell: Add-CATemplate -Name {{ pri_adcs_enrollment_template_name|quote }} -Force
   when: not pri_adcs_enrollment_template_in_ca.stdout_lines[0]|bool

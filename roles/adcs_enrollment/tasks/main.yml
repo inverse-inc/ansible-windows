@@ -16,6 +16,6 @@
   register: pri_adcs_enrollment_chain_thumbprint_raw
   changed_when: no
 
-- name: set PEM encoded cert as fact with correct headers
+- name: set PEM base64 encoded cert as fact with correct headers
   set_fact:
-    out_adcs_enrollment_chain_thumbprint: "-----BEGIN CERTIFICATE-----\n{{pri_adcs_enrollment_chain_thumbprint_raw.stdout_lines|join('\n')}}\n-----END CERTIFICATE-----"
+    out_adcs_enrollment_chain_thumbprint: "-----BEGIN CERTIFICATE-----\n{{ pri_adcs_enrollment_chain_thumbprint_raw.stdout_lines|join('\n') }}\n-----END CERTIFICATE-----"

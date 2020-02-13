@@ -42,7 +42,7 @@ None
   post_tasks:
   - name: create a local copy of the AD CS certificate chain for later use
     copy:
-      content: '{{out_adcs_enrollment_chain_thumbprint}}'
+      content: '{{ out_adcs_enrollment_chain_thumbprint }}'
       dest: ca_chain.pem
     delegate_to: localhost
     run_once: yes

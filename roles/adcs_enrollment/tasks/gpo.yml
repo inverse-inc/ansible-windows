@@ -1,28 +1,28 @@
 ---
 - name: check if the GPO has already been imported
-  win_shell: if (Get-GPO -Name {{pri_adcs_enrollment_gpo_name|quote}} -ErrorAction SilentlyContinue) { $true } else { $false }
+  win_shell: if (Get-GPO -Name {{ pri_adcs_enrollment_gpo_name|quote }} -ErrorAction SilentlyContinue) { $true } else { $false }
   register: pri_adcs_enrollment_gpo_exists
   changed_when: no
 
 - block:
   - name: create backup folder on host for GPO
     win_file:
-      path: C:\temp\{{pri_adcs_enrollment_gpo_name}}-backup
+      path: C:\temp\{{ pri_adcs_enrollment_gpo_name }}-backup
       state: directory
 
   - name: copy across backup of GPO
     win_copy:
       src: gpo_backup/
-      dest: C:\temp\{{pri_adcs_enrollment_gpo_name}}-backup\
+      dest: C:\temp\{{ pri_adcs_enrollment_gpo_name }}-backup\
 
   - name: restore GPO from backup
-    win_shell: Import-GPO -BackupGpoName {{pri_adcs_enrollment_gpo_name|quote}} -TargetName {{pri_adcs_enrollment_gpo_name|quote}} -Path C:\temp\{{pri_adcs_enrollment_gpo_name}}-backup -CreateIfNeeded
+    win_shell: Import-GPO -BackupGpoName {{ pri_adcs_enrollment_gpo_name|quote }} -TargetName {{ pri_adcs_enrollment_gpo_name|quote }} -Path C:\temp\{{ pri_adcs_enrollment_gpo_name }}-backup -CreateIfNeeded
 
   - name: delete backup folder on host
     win_file:
-      path: C:\temp\{{pri_adcs_enrollment_gpo_name}}-backup
+      path: C:\temp\{{ pri_adcs_enrollment_gpo_name }}-backup
       state: absent
-      
+
   when: not pri_adcs_enrollment_gpo_exists.stdout_lines[0]|bool
 
 # The backup GPO has an ID that is unique to the domain it came from, these
@@ -35,10 +35,10 @@
 
 - name: set the policy server ID for the GPO
   win_gpo_reg:
-    gpo: '{{pri_adcs_enrollment_gpo_name}}'
-    path: HKLM\Software\Policies\Microsoft\Cryptography\PolicyServers\{{item.path|default('')}}
-    name: '{{item.name|default(omit)}}'
-    value: "{{pri_adcs_enrollment_policy_id.stdout_lines[0]}}"
+    gpo: '{{ pri_adcs_enrollment_gpo_name }}'
+    path: HKLM\Software\Policies\Microsoft\Cryptography\PolicyServers\{{ item.path|default('') }}
+    name: '{{ item.name|default(omit) }}'
+    value: "{{ pri_adcs_enrollment_policy_id.stdout_lines[0] }}"
     type: String
   with_items:
   - {}
@@ -47,7 +47,7 @@
 
 - name: ensure GPO is linked and enforced
   win_gpo_link:
-    name: '{{pri_adcs_enrollment_gpo_name}}'
+    name: '{{ pri_adcs_enrollment_gpo_name }}'
     state: present
     enforced: yes
     enabled: yes

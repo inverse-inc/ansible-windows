@@ -1,6 +1,6 @@
 galaxy_info:
   author: "Inverse inc <info@inverse.ca>"
-  description: "Configure a Windows domain"
+  description: "Install and configure AD CS services"
   company: "Inverse inc"
   license: "MIT"
   min_ansible_version: 2.5
@@ -17,5 +17,7 @@ galaxy_info:
   galaxy_tags:
     - windows
     - domain
+    - adcs
+    - enrollment
 
 dependencies: []

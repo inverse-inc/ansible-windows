@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2020-03-24
+
+### Changed
+- Role modules should be in `plugins` directory in place of `library` directory
+
 ## [1.0.1] - 2020-02-13
 
 ### Added
@@ -14,5 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [upstream ansible-windows
   repository](https://github.com/jborean93/ansible-windows)
 
-[Unreleased]: https://github.com/inverse-inc/ansible-windows/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/inverse-inc/ansible-windows/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/inverse-inc/ansible-windows/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/inverse-inc/ansible-windows/releases/tag/v1.0.1
